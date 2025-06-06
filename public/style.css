@@ -1,3 +1,9 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -18,8 +24,11 @@ body {
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   text-align: center;
-  width: 380px;
+  width: 90%;
+  max-width: 380px; /* max width on bigger screens */
+  box-sizing: border-box;
 }
+
 
 .fb-logo {
   color: #1877f2;
@@ -137,7 +146,9 @@ footer hr {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  gap: 8px; /* adds consistent spacing */
 }
+
 
 .footer-links a {
   margin: 5px 8px;
@@ -145,4 +156,37 @@ footer hr {
 
 footer p {
   margin-top: 15px;
+}
+
+@media (max-width: 480px) {
+  .login-box {
+    padding: 30px 15px;
+  }
+
+  .fb-logo {
+    font-size: 32px;
+  }
+
+  .login-text {
+    font-size: 16px;
+  }
+
+  form input, form button[type="submit"] {
+    font-size: 14px;
+    padding: 12px 8px;
+  }
+  
+  footer {
+    font-size: 12px;
+    padding: 15px 10px;
+  }
+
+  .footer-links {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .footer-links a {
+    margin: 4px 0;
+  }
 }

